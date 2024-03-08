@@ -30,7 +30,6 @@ services:
       - arangodb
     volumes:
       - /tmp/docker-yeti-exports:/opt/yeti/exports
-      - /data/app/yeti.conf:/app/yeti.conf
 
   tasks:
     container_name: yeti-tasks
