@@ -4,10 +4,10 @@ services:
   frontend:
     container_name: yeti-frontend
     build:
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: ./docker-frontend/Dockerfile
     image: yetiplatform/yeti-frontend:latest
     ports:
-      - 80:80
+      - 8081:80
     volumes:
       - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
@@ -17,7 +17,7 @@ services:
     container_name: yeti-api
     image: yetiplatform/yeti:latest
     build:
-      dockerfile: ./yeti/Dockerfile
+      dockerfile: ./docker-yeti/Dockerfile
     env_file:
       - ${YETI_DOCKER_ENVFILE}
     entrypoint:
@@ -36,7 +36,7 @@ services:
     container_name: yeti-tasks
     image: yetiplatform/yeti:latest
     build:
-      dockerfile: ./yeti/Dockerfile
+      dockerfile: ./docker-yeti/Dockerfile
     env_file:
       - ${YETI_DOCKER_ENVFILE}
     command: ['tasks']
