@@ -59,3 +59,7 @@ services:
 networks:
   default:
     name: yeti_network
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
