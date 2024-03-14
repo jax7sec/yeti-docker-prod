@@ -1,6 +1,9 @@
 # Actual Yeti container
 FROM python:3.10 AS yeti
 
+# 设置时区为中国标准时间
+ENV TZ Asia/Shanghai
+
 # Python
 RUN apt-get update && apt-get install -y \
     python3-pip \
