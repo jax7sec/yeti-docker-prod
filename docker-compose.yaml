@@ -53,7 +53,7 @@ services:
     container_name: yeti-arangodb
     image: arangodb:3.11.8
     environment:
-      - ARANGO_ROOT_PASSWORD=${YETI_ARANGODB_PASSWORD｝
+      - ARANGO_ROOT_PASSWORD=${YETI_ARANGODB_PASSWORD}
     volumes:
       - /data/app/yeti-data:/var/lib/arangodb3
 
