@@ -30,7 +30,8 @@ services:
       - arangodb
       - mysql
     volumes:
-      - /tmp/docker-yeti-exports:/opt/yeti/exports
+      - /data/app/yeti-data/docker-yeti-exports:/opt/yeti/exports
+      - /data/app/yeti-data/yeti_log/yeti_audit.log:/var/log/yeti_audit.log
 
   tasks:
     container_name: yeti-tasks
