@@ -28,8 +28,14 @@ RUN pip3 install --upgrade pip && pip3 install poetry
 # Install yeti
 RUN poetry install --no-root --with plugins
 
+# 创建并设置虚拟环境路径，确保 /home/appuser 可写
+ENV VIRTUAL_ENV=/app/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 # 确保目录权限正确
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appuser /app /home/appuser
+
 # 切换到非 root 用户
 USER appuser
 
