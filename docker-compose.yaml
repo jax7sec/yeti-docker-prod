@@ -55,9 +55,8 @@ services:
     container_name: yeti-redis
     image: redis:latest
     user: "redis"  # 使用 redis 用户
-
+    
   arangodb:
-    arangodb:
     image: yeti-arangodb
     build:
       dockerfile: ./docker-arangodb/Dockerfile
