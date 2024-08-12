@@ -55,17 +55,14 @@ services:
     container_name: yeti-redis
     image: redis:latest
     user: "redis"  # 使用 redis 用户
-    
+
   arangodb:
-    image: yeti-arangodb
-    build:
-      dockerfile: ./docker-arangodb/Dockerfile
     container_name: yeti-arangodb
+    image: arangodb:3.11.8
     environment:
       - ARANGO_ROOT_PASSWORD=${YETI_ARANGODB_PASSWORD}
     volumes:
       - /data/app/yeti-data:/var/lib/arangodb3
-    user: "arangod"
 
   mysql:
     container_name: yeti-mysql
