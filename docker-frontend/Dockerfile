@@ -13,5 +13,15 @@ RUN npm install
 RUN npm run build
 
 FROM nginx:latest AS frontend
+
+# 创建需要的目录并设置适当的权限
+RUN mkdir -p /var/cache/nginx /www && \
+    chown -R www-data:www-data /var/cache/nginx /www
+
+# 将构建后的前端代码从构建镜像中复制到 Nginx 的 Web 根目录
 COPY --from=frontend-builder /app/dist /www
+
+# 设置 Nginx 以非 root 用户身份运行
+USER www-data
+
 EXPOSE 80
