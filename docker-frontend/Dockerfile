@@ -27,4 +27,7 @@ COPY --from=frontend-builder /app/dist /www
 # 切换到非 root 用户
 USER app
 
+# 可选：在 nginx 配置中设置 user app;
+# RUN echo "user app;" >> /etc/nginx/nginx.conf
+
 EXPOSE 80

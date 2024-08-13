@@ -29,7 +29,7 @@ RUN pip3 install --upgrade pip && pip3 install poetry
 RUN poetry install --no-root --with plugins
 
 # 确保目录权限正确
-RUN chown -R app:app /app
+RUN chown -R app:app /app /var/log /var/run
 
 # 切换到非 root 用户
 USER app
