@@ -9,4 +9,5 @@ cat /etc/passwd | grep app
 sudo usermod -aG sudo $(whoami)
 sudo su - app
 
+设置mysql用户的权限
 sudo chown -R 999:999 /data/app/yeti-data/mysql-data

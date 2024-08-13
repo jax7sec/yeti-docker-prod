@@ -1,21 +1,16 @@
 ## Prod deployment
 
-This will deploy a Yeti prod deployment:
-
-* Built JS frontend, served statically by nginx
-* nginx proxying API queries to the backend served by gunicorn
-
-Run the deployment:
-
-```bash
-docker compose up
 ```
+git clone git@github.com:jax7sec/yeti-docker-prod.git
+cd yeti-docker-prod/
 
-Should get you a Yeti instance running on http://localhost:80
+# 克隆Yeti前后端代码
+git clone git@github.com:jax7sec/yeti-feeds-frontend.git
+git clone git@github.com:jax7sec/yeti.git
 
+# 复制编辑配置文件
+cp yeti/yeti.conf.sample yeti/yeti.conf
 
-## Add an admin user to Yeti
-
-```bash
-docker compose exec api create-user yeti yeti --admin
+# 构建并启动容器
+docker-compose build --no-cache && docker-compose up
 ```
