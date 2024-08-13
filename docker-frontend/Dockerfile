@@ -24,10 +24,19 @@ RUN mkdir -p /var/cache/nginx /www /var/run/nginx && \
 # 将构建后的前端代码从构建镜像中复制到 Nginx 的 Web 根目录
 COPY --from=frontend-builder /app/dist /www
 
+# 可选：在 nginx 配置中设置 user app;
+RUN echo "user app;" >> /etc/nginx/nginx.conf
+
+# 设置工作目录
+WORKDIR /www
+
+# 确保 app 用户可以写入必要文件
+RUN touch /var/run/nginx.pid && chown app:app /var/run/nginx.pid
+
 # 切换到非 root 用户
 USER app
 
-# 可选：在 nginx 配置中设置 user app;
-# RUN echo "user app;" >> /etc/nginx/nginx.conf
-
 EXPOSE 80
+
+# 启动 nginx
+CMD ["nginx", "-g", "daemon off;"]

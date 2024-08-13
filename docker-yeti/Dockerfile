@@ -25,8 +25,9 @@ RUN cp ./extras/docker/docker-entrypoint.sh /docker-entrypoint.sh
 # 升级 pip 并安装 Poetry
 RUN pip3 install --upgrade pip && pip3 install poetry
 
-# 安装 Yeti
-RUN poetry install --no-root --with plugins
+# 安装 Yeti，并确保安装路径在 PATH 中
+RUN poetry install --no-root --with plugins && \
+    echo "export PATH=/app/.venv/bin:$PATH" >> /etc/profile.d/poetry.sh
 
 # 确保目录权限正确
 RUN chown -R app:app /app /var/log /var/run
@@ -34,9 +35,15 @@ RUN chown -R app:app /app /var/log /var/run
 # 切换到非 root 用户
 USER app
 
+# 将虚拟环境路径添加到用户的 PATH 中
+ENV PATH="/app/.venv/bin:$PATH"
+
 # 设置 Python 路径
 ENV PYTHONPATH /app
 
 # 入口点和默认命令
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["webserver"]
+
+# 调试：输出 PATH 以验证
+RUN echo $PATH && which uvicorn && which celery
