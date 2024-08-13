@@ -1,0 +1,12 @@
+# 宿主机上创建app用户
+sudo groupadd -g 6000 app
+sudo useradd -u 6001 -g app -m -d /home/app -s /bin/bash app
+设置用户密码
+sudo passwd app
+查看结果
+cat /etc/passwd | grep app
+允许当前用户通过 sudo 切换到 app 用户：
+sudo usermod -aG sudo $(whoami)
+sudo su - app
+
+sudo chown -R 999:999 /data/app/yeti-data/mysql-data
