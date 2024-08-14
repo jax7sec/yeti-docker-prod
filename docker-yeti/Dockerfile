@@ -35,9 +35,6 @@ RUN pip3 install --upgrade pip && pip3 install poetry
 # 安装 Yeti
 RUN poetry install --no-root --with plugins
 
-# 确保虚拟环境目录对 app 用户可读写
-RUN chown -R app:app /app /var/log/yeti_log /var/run
-
 # 切换到非 root 用户
 USER app
 
