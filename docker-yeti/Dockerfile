@@ -26,14 +26,15 @@ RUN cp ./extras/docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN mkdir -p /app/.cache /app/.venv \
     && touch /var/log/yeti_audit.log /var/log/yeti_system.log
 
-# 设置权限
-RUN chown -R app:app /app /var/log/yeti_audit.log /var/log/yeti_system.log /var/run
-
 # 升级 pip 并安装 Poetry
 RUN pip3 install --upgrade pip && pip3 install poetry
 
-# 安装 Yeti
-RUN poetry install --no-root --with plugins
+# 安装 Yeti 依赖项
+RUN poetry config virtualenvs.in-project true \
+    && poetry install --no-root --with plugins
+
+# 设置权限
+RUN chown -R app:app /app /var/log/yeti_audit.log /var/log/yeti_system.log /var/run /app/.venv
 
 # 切换到非 root 用户
 USER app
