@@ -12,7 +12,7 @@ services:
       - ./docker-frontend/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - api
-    user: "app"  # 使用 app 用户
+    #user: "app"  # 使用 app 用户
 
   api:
     container_name: yeti-api
