@@ -26,9 +26,6 @@ RUN mkdir -p /var/cache/nginx /www /var/run/nginx /var/log/nginx && \
 # 将构建后的前端代码从构建镜像中复制到 Nginx 的 Web 根目录
 COPY --from=frontend-builder /app/dist /www
 
-# 设置 nginx 进程用户（此指令将被忽略，因为我们在 CMD 中已经切换到 app 用户）
-RUN echo "user app;" >> /etc/nginx/nginx.conf
-
 # 确保所有文件的权限都已正确设置为 app 用户
 RUN chown -R app:app /www
 
