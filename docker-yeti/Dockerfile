@@ -23,11 +23,11 @@ WORKDIR /app
 RUN cp ./extras/docker/docker-entrypoint.sh /docker-entrypoint.sh
 
 # 创建必要的目录并设置权限
-RUN mkdir -p /app/.cache /app/.venv /var/log/yeti_log /var/run /data/app/yeti-data/yeti_log \
-    && touch /var/log/yeti_log/yeti_audit.log /var/log/yeti_log/yeti_system.log
+RUN mkdir -p /app/.cache /app/.venv \
+    && touch /var/log/yeti_audit.log /var/log/yeti_system.log
 
 # 设置权限
-RUN chown -R app:app /app /var/log/yeti_log /var/run /data/app/yeti-data/yeti_log
+RUN chown -R app:app /app /var/log/yeti_audit.log /var/log/yeti_system.log /var/run
 
 # 升级 pip 并安装 Poetry
 RUN pip3 install --upgrade pip && pip3 install poetry
@@ -36,7 +36,7 @@ RUN pip3 install --upgrade pip && pip3 install poetry
 RUN poetry install --no-root --with plugins
 
 # 确保虚拟环境目录对 app 用户可读写
-RUN chown -R app:app /app/.cache /app/.venv /var/log/yeti_log /var/run /data/app/yeti-data/yeti_log
+RUN chown -R app:app /app /var/log/yeti_log /var/run
 
 # 切换到非 root 用户
 USER app
