@@ -24,8 +24,10 @@ RUN cp ./extras/docker/docker-entrypoint.sh /docker-entrypoint.sh
 
 # 创建必要的目录并设置权限
 RUN mkdir -p /app/.cache /app/.venv /var/log/yeti_log /var/run /data/app/yeti-data/yeti_log \
-    && touch /var/log/yeti_log/yeti_audit.log /var/log/yeti_log/yeti_system.log \
-    && chown -R app:app /app/.cache /app/.venv /var/log/yeti_log /var/run /data/app/yeti-data/yeti_log
+    && touch /var/log/yeti_log/yeti_audit.log /var/log/yeti_log/yeti_system.log
+
+# 设置权限
+RUN chown -R app:app /app /var/log/yeti_log /var/run /data/app/yeti-data/yeti_log
 
 # 升级 pip 并安装 Poetry
 RUN pip3 install --upgrade pip && pip3 install poetry

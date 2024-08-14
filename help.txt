@@ -1,4 +1,4 @@
-# 宿主机上创建app用户
+# 1、宿主机上创建app用户
 sudo groupadd -g 6000 app
 sudo useradd -u 6001 -g app -m -d /home/app -s /bin/bash app
 设置用户密码
@@ -9,5 +9,16 @@ cat /etc/passwd | grep app
 sudo usermod -aG sudo $(whoami)
 sudo su - app
 
-设置mysql用户的权限
+# 2、运行之前记得先将.env、yeti.conf配置好
+
+# 3、设置mysql用户的权限
+mkdir /data/app/yeti-data/mysql-data
 sudo chown -R 999:999 /data/app/yeti-data/mysql-data
+
+# 4、其他前置步骤
+mkdir /data/app/yeti-data
+mkdir /data/app/yeti-data/yeti_log
+echo " " > /data/app/yeti-data/yeti_log/yeti_audit.log
+echo " " > /data/app/yeti-data/yeti_log/yeti_system.log
+chmod 666 /data/app/yeti-data/yeti_log/yeti_audit.log
+chmod 666 /data/app/yeti-data/yeti_log/yeti_system.log
