@@ -17,6 +17,8 @@ git clone git@github.com:jax7sec/yeti-feeds-frontend.git
 git clone git@github.com:jax7sec/yeti.git
 cp ../yeti.conf yeti/yeti.conf
 cp ../.env .env
+# 复制nginx.conf到当前目录 使用 docker-compose up 命令，当前目录则是 docker-compose.yml 所在的目录
+cp docker-frontend/nginx.conf .
 cp /root/test/backup/*.py yeti/plugins/feeds/public/
 chmod +x yeti/extras/docker/docker-entrypoint.sh
 # 构建并启动容器
