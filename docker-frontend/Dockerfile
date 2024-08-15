@@ -17,9 +17,10 @@ FROM nginx:latest AS frontend
 # 创建非 root 用户
 RUN groupadd -g 6000 app && useradd -m -u 6001 -g app app
 
-# 创建必要的目录，并设置适当的权限
-RUN mkdir -p /home/app/log /home/app/run /www && \
-    chown -R app:app /home/app /www
+# 创建需要的目录并设置适当的权限
+RUN mkdir -p /var/cache/nginx /var/log/nginx /var/run/nginx /www \
+    && chown -R app:app /var/cache/nginx /var/log/nginx /var/run/nginx /www \
+    && chmod -R 755 /var/cache/nginx
 
 # 复制前端构建输出
 COPY --from=frontend-builder /app/dist /www
