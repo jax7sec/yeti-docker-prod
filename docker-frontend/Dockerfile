@@ -32,7 +32,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 USER app
 
 # 暴露端口
-EXPOSE 80
+EXPOSE 8080
 
 # 启动 Nginx
 CMD ["nginx", "-g", "daemon off;"]
