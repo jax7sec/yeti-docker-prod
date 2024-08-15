@@ -13,6 +13,7 @@ sudo su - app
 
 # 3、其他前置步骤
 mkdir /data/app/yeti-data
+chown -R 6001:6000 /data/app/yeti-data
 mkdir /data/app/yeti-data/yeti_log
 echo " " > /data/app/yeti-data/yeti_log/yeti_audit.log
 echo " " > /data/app/yeti-data/yeti_log/yeti_system.log
@@ -23,5 +24,8 @@ chmod 666 /data/app/yeti-data/yeti_log/yeti_system.log
 mkdir /data/app/yeti-data/mysql-data
 sudo chown -R 999:999 /data/app/yeti-data/mysql-data
  
-# 5、手动设置 源代码中 /docker-frontend/nginx.conf 的权限为app所有 （公司环境中应该不用特地设置）
-chown -R app:app /home/app/yeti-docker-prod/
+其他要点：
+（1）yeti.conf放到对应目录下
+（2）.env放到docker-compose所在目录下
+（3）nginx.conf放到docker-compose所在目录下
+（4）
