@@ -18,9 +18,9 @@ FROM nginx:latest AS frontend
 RUN groupadd -g 6000 app && useradd -m -u 6001 -g app app
 
 # 创建需要的目录并设置适当的权限
-RUN mkdir -p /var/cache/nginx /var/log/nginx /var/run/nginx /www \
-    && chown -R app:app /var/cache/nginx /var/log/nginx /var/run/nginx /www \
-    && chmod -R 755 /var/cache/nginx
+RUN mkdir -p /var/cache/nginx /home/app/log /home/app/run /www \
+    && chown -R app:app /var/cache/nginx /home/app/log /home/app/run /www \
+    && chmod -R 755 /var/cache/nginx /home/app/log /home/app/run
 
 # 复制前端构建输出
 COPY --from=frontend-builder /app/dist /www
