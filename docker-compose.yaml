@@ -57,7 +57,8 @@ services:
 
   arangodb:
     container_name: yeti-arangodb
-    image: arangodb:3.11.8
+    build: 
+      dockerfile: ./docker-arangodb/Dockerfile
     environment:
       - ARANGO_ROOT_PASSWORD=${YETI_ARANGODB_PASSWORD}
     volumes:

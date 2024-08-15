@@ -24,4 +24,4 @@ mkdir /data/app/yeti-data/mysql-data
 sudo chown -R 999:999 /data/app/yeti-data/mysql-data
  
 # 5、手动设置 源代码中 /docker-frontend/nginx.conf 的权限为app所有 （公司环境中应该不用特地设置）
-
+chown -R app:app /home/app/yeti-docker-prod/
